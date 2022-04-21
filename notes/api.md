@@ -19,7 +19,13 @@ ES服务器使用的 Async IO asynchronous 是能够很好的解决 C10K问题�
 http 模块允许通过http 公开Es的API
 
 ```
-http.port 
-http.publish_port 
+http.compression 如果可以accept-Encoding 可以进行压缩
+http.compression_level 确认http 回复 ，范围在1-9
+http.cors.enabled 启用或者关闭跨源资源共享，就是从另外一个源上的浏览器请求
+http.cors.allow-origin 那些源可以被允许
+http.cors.allow-method 允许的metthod GET HEAD POST PUT　DELETE
+http.pipelining　支持ｈｔｔｐ管线化
+http.pipelining.max_events　最大支持的管线化事务
 ```
 
+内部比如ｊａｖａ客户端和服务器，用ｊｓｏｎ内部通信。
