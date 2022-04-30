@@ -28,3 +28,97 @@
 
 
 
+- 模糊匹配 fuzziness 可以请求字段类型进行模糊匹配
+
+```http
+{
+	"match":{
+		"message" : {"query":"this is a test","operator":"and"}
+	}
+}
+```
+
+- 零索引词查询 如果查询使用的分词器移除所有词元，默认行为是不匹配任何文档，使用 zero_terms_query 选项进行修改，接受none(默认)和all 相当于 match_all 查询
+
+```json
+{
+	"match":{
+		"message":{
+			"query": "to be or not to be",
+			"operateor":"and",
+			"zero_terms_query":"all"
+		}
+	}
+}
+```
+
+
+
+- 短语查询
+  - 短语查询 分析文本且创建短语查询
+
+```
+{
+	"match_phrase":{
+		"message"： "this is a test"
+	}
+}
+```
+
+​	因为短语查询只是标准查询的一个类型， 可以用于一下方式使用
+
+```json
+{
+	"match":{
+		"message":{"query":"this is a test","type":"phrase"}
+	}
+}
+
+{
+	"match":{
+		"message":{"query":"this is a test","analyzer":"my_analyzer"}
+	}
+}
+```
+
+slop 可配置的slop 匹配索引词 
+
+- 短语前缀匹配
+
+  可以对文本最后一个字段进行 前缀匹配 例如：
+
+  ```json
+  {
+  	"match_phrase_prefix":{"message":"this is a test"}
+  }
+  ```
+
+  
+
+### 2 多字段查询
+
+在标准查询
+
+```
+{
+	"multi_match":{
+		"query":"this is a test",
+		"fields": ["subject","message"]
+	}
+}
+```
+
+字段可以通过通配符指定， 个别字段可以用caret(^）进行加权，比如
+
+```
+{
+	"multi_match":{
+		"query":"this is a test",
+		"fields": ["subject^3","message"]
+	}
+}
+```
+
+
+
+说明 subject 重要3倍
