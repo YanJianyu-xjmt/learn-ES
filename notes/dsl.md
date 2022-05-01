@@ -122,3 +122,11 @@ slop 可配置的slop 匹配索引词
 
 
 说明 subject 重要3倍
+
+
+
+然后这里 must 相当于 and
+
+shold 相当于 or
+
+must_not 相当于 and not
