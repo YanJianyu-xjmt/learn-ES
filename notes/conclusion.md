@@ -19,7 +19,3 @@ POST logs-my_app-default/_doc
 ```
 
 - 
-
-
-
-
