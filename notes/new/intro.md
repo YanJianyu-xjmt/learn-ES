@@ -256,6 +256,31 @@ http://127.0.0.1:9200/shopping/_search
 
 多条件
 
-must 可能表示是
+must 表示的是 每个条件都要符合
+
+```
+{
+    "query":{
+        "bool":{
+            "must":[
+                {
+                    "match":{
+                        "category":"小米"
+                    }
+                },
+                {
+                    "match":{
+                        "title":"小米手机"
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+
+
+
 
 ## 4 聚合
