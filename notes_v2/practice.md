@@ -100,6 +100,10 @@ GET _search
 
 ```
 
-
-
 这个例子，由于用了constant_socre大家都是1
+
+## 2 Full text query
+
+full text query 用于分析 text 字段 比如email
+
+的正文。如果分词是用的同一个分词器就ok。
