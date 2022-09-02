@@ -107,3 +107,11 @@ GET _search
 full text query 用于分析 text 字段 比如email
 
 的正文。如果分词是用的同一个分词器就ok。
+
+
+
+### 2.1 intervals
+
+间隔
+
+按照mtching rules返回文档
