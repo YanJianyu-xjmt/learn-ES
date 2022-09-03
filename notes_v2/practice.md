@@ -108,10 +108,140 @@ full text query 用于分析 text 字段 比如email
 
 的正文。如果分词是用的同一个分词器就ok。
 
-
-
 ### 2.1 intervals
 
 间隔
 
-按照mtching rules返回文档
+按照mtching rules返回文```
+
+```
+POST _search
+{
+  "query": {
+    "intervals" : {
+      "my_text" : {
+        "all_of" : {
+          "ordered" : true,
+          "intervals" : [
+            {
+              "match" : {
+                "query" : "my favorite food",
+                "max_gaps" : 0,
+                "ordered" : true
+              }
+            },
+            {
+              "any_of" : {
+                "intervals" : [
+                  { "match" : { "query" : "hot water" } },
+                  { "match" : { "query" : "cold porridge" } }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+这里interval  my favorite food 这里不能有间隔 且顺序要对
+
+### 2.1.1 Top level Params
+
+这里是top level 参数
+
+- query
+  
+  - 这就很简单是 写目标query
+
+- max_gaps
+  
+  - 最大的间隔
+
+- ordered
+
+    匹配的词必须要是按照顺序的
+
+- analyzer
+  
+  - 指定分析器
+
+- filter
+  
+  - 过滤器
+
+- use_FIELD
+  
+  - 这里可以用里面的field 而不是外面的field
+
+## 2.2 prefix
+
+    前缀terms 匹配
+
+-   prefix 就是指定的query
+
+- analyzer 大概就是指定分析器
+
+- use_field 同上
+
+## 2.3 wildcard
+
+## 2.4 fuzzy
+
+- 这个很吊 模糊匹配
+
+- term 匹配的词
+
+- prefix_length 必须要匹配的前缀长度，默认0
+
+- transpositions 显性的指定 是否可以改变位置 比如 ab-》ba 默认是true
+
+## 这里是试试
+
+- fuzziness 
+  
+  - matching能够允许的最长的编辑距离
+
+- anaaaaalyzer
+  
+  - 分析器
+
+- use—field 字段
+
+## 2.5 any_OF
+
+就是任一就可以
+
+- intervals
+
+- max_gaps
+
+- ordred
+
+- filter
+
+## 2.6 同上all_OF
+
+## 2.7 FILTE
+
+- FILTER返回intervals
+  
+  - after
+  
+  - before
+  
+  - contained_by 感觉这个包含
+  
+  - containing
+  
+  - not_contained_by
+  
+  - not_ontaining 不包非常有用
+  
+  - not_overlapping
+  
+  - overlapping
+  
+  - script
